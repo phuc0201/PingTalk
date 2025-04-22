@@ -3,12 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const ShortUniqueId = require("short-unique-id");
 const { COLORS } = require("../config/constants/models.constants");
-const { User } = require("../models");
+const { User, Token } = require("../models");
 const ApiError = require("../utils/ApiError");
-const uid = new ShortUniqueId({
-  length: 4,
-  dictionary: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-});
+const { tokenTypes } = require("../config/tokens");
 
 module.exports = {
   register: async (userBody) => {
@@ -21,5 +18,30 @@ module.exports = {
     userBody.color = COLORS[Math.floor(Math.random() * COLORS.length)];
     const user = await User.create(userBody);
     return user;
+  },
+
+  login: async ({ email, password }) => {
+    const user = await User.findOne({ email });
+    if (!user || !(await user.isPasswordMatch(password))) {
+      throw new ApiError(
+        StatusCodes.UNAUTHORIZED,
+        "Incorrect email or password"
+      );
+    }
+    return user;
+  },
+
+  logout: async ({ refreshToken }) => {
+    const token = await Token.findOne({
+      token: refreshToken,
+      type: tokenTypes.REFRESH,
+      blacklisted: false,
+    });
+
+    if (!token) {
+      throw new ApiError(StatusCodes.NOT_FOUND, "Not found token");
+    }
+
+    await token.deleteOne();
   },
 };

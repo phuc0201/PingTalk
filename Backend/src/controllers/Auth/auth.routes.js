@@ -63,7 +63,28 @@ router.post(
  *       200:
  *         description: User logged successfully
  */
-router.post("/login", authController.login);
+router.post("/login", validate(authValidation.login), authController.login);
+
+/**
+ * @swagger
+ * /api/v1/auth/logout:
+ *   post:
+ *     summary: Logout
+ *     tags: [Auth]
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logout successful
+ */
+
+router.post("/logout", validate(authValidation.logout), authController.logout);
 
 /**
  * @swagger
