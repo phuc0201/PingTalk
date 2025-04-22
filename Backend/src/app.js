@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const passport = require("passport");
 const { jwtStrategy } = require("./config/passport");
+const cookieParser = require("cookie-parser");
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -27,7 +28,7 @@ const swaggerOptions = {
     },
     security: [{ bearerAuth: [] }],
   },
-  apis: ["./src/routes/v1/*.js"],
+  apis: ["./src/controllers/*/*.routes.js"],
 };
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
@@ -48,6 +49,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
 app.use(passport.initialize());
+
+app.use(cookieParser());
+
 passport.use("jwt", jwtStrategy);
 
 app.use("/api/v1", routes);

@@ -6,6 +6,11 @@ const { roles } = require("../config/roles");
 
 const userSchema = mongoose.Schema(
   {
+    fullname: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     username: {
       type: String,
       required: true,
@@ -39,10 +44,6 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    shortId: {
-      type: String,
-      required: true,
-    },
     color: {
       type: String,
       required: true,
@@ -64,6 +65,11 @@ userSchema.plugin(paginate);
  */
 userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  return !!user;
+};
+
+userSchema.statics.isUsernameTaken = async function (username) {
+  const user = await this.findOne({ username });
   return !!user;
 };
 

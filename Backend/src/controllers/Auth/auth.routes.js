@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../../controllers/auth.controllers");
+const authController = require("./auth.controllers");
 const {
   verifyToken,
   verifyRoles,
 } = require("../../middlewares/auth.middleware");
+const validate = require("../../middlewares/validate.middleware");
+const authValidation = require("./auth.validation");
 
 /**
  * @swagger
- * /api/auth/register:
+ * /api/v1/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -25,15 +27,22 @@ const {
  *               password:
  *                 type: string
  *                 example: "123456"
+ *               username:
+ *                type: string,
+ *                example: "phuc0102"
  *     responses:
  *       201:
  *         description: Account registered successfully
  */
-router.post("/register", authController.register);
+router.post(
+  "/register",
+  validate(authValidation.register),
+  authController.register
+);
 
 /**
  * @swagger
- * /api/auth/login:
+ * /api/v1/auth/login:
  *   post:
  *     summary: Login
  *     tags: [Auth]
@@ -58,7 +67,7 @@ router.post("/login", authController.login);
 
 /**
  * @swagger
- * /api/auth/protected:
+ * /api/v1/auth/protected:
  *   get:
  *     summary: Protected
  *     tags: [Auth]
@@ -79,7 +88,7 @@ router.get(
 
 /**
  * @swagger
- * /api/auth/refresh-token:
+ * /api/v1/auth/refresh-token:
  *   post:
  *     summary: Refresh access token
  *     tags: [Auth]
@@ -103,7 +112,7 @@ router.post("/refresh-token", authController.refreshToken);
 
 /**
  * @swagger
- * /api/auth/change-password:
+ * /api/v1/auth/change-password:
  *   post:
  *     summary: Change user password
  *     tags: [Auth]
