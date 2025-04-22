@@ -1,12 +1,9 @@
 const { StatusCodes } = require("http-status-codes");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const ShortUniqueId = require("short-unique-id");
 const { COLORS } = require("../config/constants/models.constants");
 const { User, Token } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { tokenTypes } = require("../config/tokens");
-
+const tokenService = require("./token.service");
 module.exports = {
   register: async (userBody) => {
     if (await User.isEmailTaken(userBody.email)) {
@@ -43,5 +40,35 @@ module.exports = {
     }
 
     await token.deleteOne();
+  },
+
+  /**
+   * Refresh auth tokens
+   * @param {string} refreshToken
+   * @returns {Promise<Object>}
+   */
+  refreshAuth: async ({ refreshToken }) => {
+    try {
+      const refreshTokenDoc = await tokenService.verifyToken(
+        refreshToken,
+        tokenTypes.REFRESH
+      );
+
+      const user = await User.findById(refreshTokenDoc.user);
+      if (!user) {
+        throw new Error();
+      }
+      await refreshTokenDoc.deleteOne();
+      const tokens = await tokenService.generateAuthTokens(user);
+      return tokens;
+    } catch (error) {
+      if (
+        error.message === "Token not found" ||
+        error.message === "jwt expired"
+      ) {
+        throw new ApiError(StatusCodes.UNAUTHORIZED, "Token not found");
+      }
+      throw new ApiError(StatusCodes.UNAUTHORIZED, "Please authenticate");
+    }
   },
 };

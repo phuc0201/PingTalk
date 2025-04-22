@@ -52,7 +52,11 @@ module.exports = {
     res.status(StatusCodes.NO_CONTENT).send();
   }),
 
-  refreshToken: async (req, res) => {},
+  refreshToken: catchAsync(async (req, res) => {
+    const tokens = await authService.refreshAuth(req.body);
+    setAuthTokensToCookie(res, tokens);
+    res.send({ ...tokens });
+  }),
 
   changePassword: async (req, res) => {},
 };

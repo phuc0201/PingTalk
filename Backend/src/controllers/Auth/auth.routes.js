@@ -129,7 +129,11 @@ router.get(
  *       401:
  *         description: Invalid or expired refresh token
  */
-router.post("/refresh-token", authController.refreshToken);
+router.post(
+  "/refresh-token",
+  validate(authValidation.refreshTokens),
+  authController.refreshToken
+);
 
 /**
  * @swagger

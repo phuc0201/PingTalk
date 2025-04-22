@@ -99,6 +99,7 @@ const verifyToken = async (token, type) => {
     user: payload.sub,
     blacklisted: false,
   });
+
   if (!tokenDoc) {
     throw new Error("Token not found");
   }
