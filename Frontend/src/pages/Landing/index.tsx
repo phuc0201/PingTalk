@@ -4,9 +4,11 @@ import Body from "./Body";
 import Footer from "./Footer";
 const Landing: React.FC = () => {
   return (
-    <div className="landing-page-wapper]">
-      <Header />
-      <Body />
+    <div>
+      <div className="landing-page-wapper relative">
+        <Header />
+        <Body />
+      </div>
       <Footer />
     </div>
   );
