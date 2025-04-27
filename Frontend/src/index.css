@@ -19,7 +19,7 @@ body {
   margin: 0 auto;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1600px) {
   .landing-page-wapper {
     background-image: url("https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/674584097f8482257f855b1c_BG-2025.png");
     background-repeat: no-repeat;
