@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <footer
       style={{
-        backgroundImage: 'url("src/assets/bg-footer.png")',
+        backgroundImage: 'url("./public/assets/bg-footer.png")',
         backgroundSize: "100% 100%",
       }}
       className="min-h-96 lg:py-20 py-10 md:px-10 px-6"
