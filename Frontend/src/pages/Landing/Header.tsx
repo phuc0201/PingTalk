@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaDiscord } from "react-icons/fa";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
@@ -6,6 +6,34 @@ import DrawerMenu from "./DrawerMenu";
 
 const Header: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 1);
+    };
+
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    if (windowWidth < 1024) {
+      window.addEventListener("scroll", handleScroll);
+    } else {
+      setIsScrolled(false);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      if (windowWidth < 1024) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [windowWidth]);
+
   const megaMenu = [
     { label: "Download", link: "#" },
     { label: "Nitro", link: "#" },
@@ -18,25 +46,29 @@ const Header: React.FC = () => {
     { label: "Careers", link: "#" },
   ];
   return (
-    <header className="w-full py-10">
-      <nav className="p-0 px-10 text-white w-full flex items-center justify-center">
+    <header
+      className={`w-full lg:py-10 md:py-7 py-3 lg:relative sticky top-0 z-20 ${
+        isScrolled ? "bg-brand" : ""
+      }`}
+    >
+      <nav className="p-0 md:px-10 px-6 text-white w-full flex items-center lg:justify-center justify-between">
         <Link
           to={"/"}
-          className="flex items-center text-white gap-3 fixed top-14 left-10 -translate-y-1/2 z-10"
+          className="flex items-center text-white gap-3 lg:fixed lg:top-14 lg:left-10 lg:-translate-y-1/2 z-10"
         >
           <FaDiscord className="text-3xl" />
           <span className="text-white font-bold text-xl">PingTalk</span>
         </Link>
         <ul className="lg:flex hidden items-center ">
-          {megaMenu.map((item) => (
-            <li>
+          {megaMenu.map((item, index) => (
+            <li key={index}>
               <button className="text-white px-4 p-2 hover:bg-brand rounded-xl font-semibold lg:text-sm xl:text-base">
                 {item.label}
               </button>
             </li>
           ))}
         </ul>
-        <div className="fixed top-14 right-10 -translate-y-1/2 flex items-center gap-4 z-10">
+        <div className="lg:fixed lg:top-14 lg:right-10 lg:-translate-y-1/2 flex items-center gap-4 z-10">
           <Link
             to={"/login"}
             className="sm:block hidden px-4 p-[8px] pt-[6px] bg-white text-black hover:bg-white/80 font-semibold rounded-2xl text-center items-center text-base"

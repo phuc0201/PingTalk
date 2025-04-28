@@ -42,7 +42,7 @@ const DrawerMenu: React.FC<DrawerMenuProps> = ({
         <div
           onClick={() => setToggleMenu(!toggleMenu)}
           className={`fixed top-0 left-0 right-0 bottom-0 bg-black/70 transition-opacity duration-300 ${
-            toggleMenu ? "z-10 opacity-100" : "z-[-1] opacity-0"
+            toggleMenu ? "z-10 opacity-100" : "z-[-1] opacity-0 hidden"
           }`}
         ></div>
         <div
@@ -64,8 +64,9 @@ const DrawerMenu: React.FC<DrawerMenuProps> = ({
           </section>
           <section className="menu-body flex-1 overflow-auto">
             <div className="grid">
-              {megaMenu.map((item) => (
+              {megaMenu.map((item, index) => (
                 <Link
+                  key={index}
                   to={item.link}
                   className="text-lg px-6 font-bold text-white"
                 >

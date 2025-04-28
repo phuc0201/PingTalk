@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         backgroundImage: 'url("src/assets/bg-footer.png")',
         backgroundSize: "100% 100%",
       }}
-      className="min-h-96 py-20"
+      className="min-h-96 lg:py-20 py-10 md:px-10 px-6"
     >
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 sectionContainer">
         <div className="space-y-8">
