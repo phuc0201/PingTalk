@@ -38,7 +38,7 @@ const Body: React.FC = () => {
   return (
     <main
       style={{
-        backgroundImage: `url("./public/assets/texture_headline.webp")`,
+        backgroundImage: `url("../assets/texture_headline.webp")`,
       }}
       className="sectionContainer py-14 pb-0 md:px-10 px-6"
     >
@@ -56,24 +56,20 @@ const Body: React.FC = () => {
           </div>
           <div className="col-span-3">
             <div className="relative">
-              <img src="./public/assets/charactoers_full.webp" alt="" />
+              <img src="../assets/charactoers_full.webp" alt="" />
               <img
-                src="./public/assets/clyde.webp"
+                src="../assets/clyde.webp"
                 alt=""
                 className="absolute left-[12%] bottom-3 h-[10%] animate-float"
               />
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[25%]">
                 <img
-                  src="./public/assets/wumpus.webp"
+                  src="../assets/wumpus.webp"
                   alt=""
                   className="object-cover h-full w-auto"
                 />
                 <div ref={leafRef} className="absolute bottom-full">
-                  <img
-                    src="./public/assets/wumpus-pl.webp"
-                    alt=""
-                    className=""
-                  />
+                  <img src="../assets/wumpus-pl.webp" alt="" className="" />
                 </div>
               </div>
             </div>
