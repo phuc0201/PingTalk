@@ -79,7 +79,7 @@ const DrawerMenu: React.FC<DrawerMenuProps> = ({
           </section>
           <section className="menu-footer grid gap-2 p-6">
             <Link
-              to={"/login"}
+              to={"/auth"}
               className="text-sm p-3 px-3 rounded-lg border border-white/50 w-full text-center text-white font-medium"
             >
               Login

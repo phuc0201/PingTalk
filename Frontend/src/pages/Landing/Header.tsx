@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaDiscord } from "react-icons/fa";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import DrawerMenu from "./DrawerMenu";
+import DrawerMenu from "../../components/DrawerMenu";
 
 const Header: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
         </ul>
         <div className="lg:fixed lg:top-14 lg:right-10 lg:-translate-y-1/2 flex items-center gap-4 z-10">
           <Link
-            to={"/login"}
+            to={"/auth"}
             className="sm:block hidden px-4 p-[8px] pt-[6px] bg-white text-black hover:bg-white/80 font-semibold rounded-2xl text-center items-center text-base"
           >
             Log In
