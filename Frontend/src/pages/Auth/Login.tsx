@@ -15,9 +15,7 @@ const Login: React.FC = () => {
         <div className="w-full p-8 md:w-2/3">
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-bold text-white">Welcome back!</h1>
-            <p className="text-gray-300">
-              We&apos;re so excited to see you again!
-            </p>
+            <p className="text-gray-300">We're so excited to see you again!</p>
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -70,7 +68,10 @@ const Login: React.FC = () => {
 
             <div className="mt-4 text-start text-sm text-gray-300">
               Need an account?{" "}
-              <a href="#" className="text-indigo-400 hover:underline">
+              <a
+                href="/auth/register"
+                className="text-indigo-400 hover:underline"
+              >
                 Register
               </a>
             </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaDiscord } from "react-icons/fa";
 const Auth: React.FC = () => {
@@ -20,7 +20,7 @@ const Auth: React.FC = () => {
         <FaDiscord className="text-4xl" />
         <span className="text-white font-bold text-xl">PingTalk</span>
       </Link>
-      <Login />
+      <Outlet />
     </div>
   );
 };
