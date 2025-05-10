@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [logged, setLogged] = useState(true);
+  const logged = true;
 
   useEffect(() => {
     const handleScroll = () => {
