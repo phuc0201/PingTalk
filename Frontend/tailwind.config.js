@@ -5,6 +5,9 @@ export default {
     extend: {
       colors: {
         brand: "#5865f2",
+        dark: "#121214",
+        customDark: "#1a1a1e",
+        charcoal: "#242429",
       },
       keyframes: {
         float: {

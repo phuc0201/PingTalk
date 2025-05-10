@@ -8,6 +8,7 @@ const Header: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [logged, setLogged] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,18 +70,30 @@ const Header: React.FC = () => {
           ))}
         </ul>
         <div className="lg:fixed lg:top-14 lg:right-10 lg:-translate-y-1/2 flex items-center gap-4 z-10">
-          <Link
-            to={"/auth/login"}
-            className="sm:block hidden px-4 p-[8px] pt-[6px] bg-white text-black hover:bg-white/80 font-semibold rounded-2xl text-center items-center text-base"
-          >
-            Log In
-          </Link>
-          <button
-            onClick={() => setToggleMenu(!toggleMenu)}
-            className="lg:hidden aspect-square h-[38px] flex bg-white/10 rounded-xl"
-          >
-            <HiOutlineMenuAlt2 className="m-auto text-xl" />
-          </button>
+          {logged && (
+            <Link
+              to={"/channels/@me"}
+              className="sm:block hidden px-4 p-[8px] pt-[6px] bg-white text-black hover:bg-white/80 font-semibold rounded-2xl text-center items-center text-base"
+            >
+              Open Pinktalk
+            </Link>
+          )}
+          {!logged && (
+            <div>
+              <Link
+                to={"/auth/login"}
+                className="sm:block hidden px-4 p-[8px] pt-[6px] bg-white text-black hover:bg-white/80 font-semibold rounded-2xl text-center items-center text-base"
+              >
+                Log In
+              </Link>
+              <button
+                onClick={() => setToggleMenu(!toggleMenu)}
+                className="lg:hidden aspect-square h-[38px] flex bg-white/10 rounded-xl"
+              >
+                <HiOutlineMenuAlt2 className="m-auto text-xl" />
+              </button>
+            </div>
+          )}
         </div>
       </nav>
 
