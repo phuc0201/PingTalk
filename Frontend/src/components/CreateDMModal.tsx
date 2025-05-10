@@ -60,8 +60,8 @@ const CreateDMModal: React.FC = () => {
 
       <div className="p-4">
         <div
-          className={`flex flex-wrap items-center gap-1 bg-[#2a2a2a] rounded-lg px-3 cursor-text border border-zinc-700 mb-2 ${
-            selectedFriends.length > 0 ? "px-1" : ""
+          className={`flex flex-wrap items-center gap-1 bg-[#2a2a2a] rounded-lg cursor-text border border-zinc-700 mb-2 ${
+            selectedFriends.length > 0 ? "px-1" : "px-3"
           }`}
           onClick={handleContainerClick}
         >
