@@ -6,6 +6,9 @@ import { CgMoreVerticalAlt } from "react-icons/cg";
 import CreateDMModal from "../../components/CreateDMModal";
 import { Link } from "react-router-dom";
 import AvatarDefault from "../../components/AvatarDefault";
+import { FaCheck } from "react-icons/fa6";
+import { IoCloseOutline } from "react-icons/io5";
+
 const friendsList = [
   {
     id: "1",
@@ -284,11 +287,11 @@ const Friends: React.FC = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <button className="bg-green-700 hover:bg-green-600 rounded-lg h-8 px-3">
-                              Accept
+                            <button className="active:scale-95 text-green-700 hover:text-green-600 bg-zinc-900 text-lg rounded-full flex items-center justify-center h-14 w-14">
+                              <FaCheck />
                             </button>
-                            <button className="border-gray-700 text-gray-200 hover:bg-gray-700 h-8 px-3 rounded-lg">
-                              Ignore
+                            <button className="active:scale-95 text-white hover:text-red-400 bg-zinc-900 text-2xl rounded-full flex items-center justify-center h-14 w-14">
+                              <IoCloseOutline />
                             </button>
                           </div>
                         </div>
