@@ -3,20 +3,25 @@ import { FaDiscord, FaUser } from "react-icons/fa";
 import { BsShop } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import CreateDMModal from "../CreateDMModal";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const ChannelSidebar: React.FC = () => {
   const [isOpenCreateDMModal, setOpenCreateDMModal] = useState<boolean>(false);
   return (
     <div className="rounded-tl-xl border-2 border-transparent border-t-customDark border-l-customDark w-full h-full p-2">
       <div>
-        <Link
-          to={"/channels/@me"}
-          className="text-gray-50 bg-customDark p-2 px-3 rounded-lg flex items-center gap-2"
+        <NavLink
+          to="/channels/@me"
+          end
+          className={({ isActive }) =>
+            `p-2 px-3 rounded-lg flex items-center hover:bg-customDark gap-2 text-gray-50 ${
+              isActive ? "bg-customDark" : ""
+            }`
+          }
         >
           <FaUser /> Friends
-        </Link>
+        </NavLink>
 
-        <div className="text-gray-400 p-2 px-3 rounded-lg flex items-center gap-2">
+        <div className="text-gray-400 p-2 px-3 rounded-lg flex items-center gap-2 cursor-pointer hover:bg-customDark">
           <svg
             className="linkButtonIcon__972a0"
             aria-hidden="true"
@@ -48,7 +53,7 @@ const ChannelSidebar: React.FC = () => {
           Nitro
         </div>
 
-        <div className="text-gray-400 p-2 px-3 rounded-lg flex items-center gap-2">
+        <div className="text-gray-400 p-2 px-3 rounded-lg flex items-center gap-2 cursor-pointer hover:bg-customDark">
           <BsShop />
           Shop
         </div>
@@ -89,9 +94,14 @@ const ChannelSidebar: React.FC = () => {
           </div>
         </div>
 
-        <Link
+        <NavLink
           to={"/channels/@me/2345567686"}
-          className="flex items-center w-full hover:bg-customDark px-2 py-2 rounded-lg cursor-pointer"
+          end
+          className={({ isActive }) =>
+            `${
+              isActive ? "bg-customDark" : ""
+            } flex items-center w-full hover:bg-customDark px-2 py-2 rounded-lg cursor-pointer`
+          }
         >
           <div className="relative w-fit">
             <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#232428]"></div>
@@ -110,7 +120,7 @@ const ChannelSidebar: React.FC = () => {
             </div>
           </div>
           <div className="text-gray-400 ml-3">THPhuc</div>
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
