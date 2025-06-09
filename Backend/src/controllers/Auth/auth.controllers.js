@@ -44,7 +44,7 @@ module.exports = {
     const user = await authService.login(req.body);
     const tokens = await tokenService.generateAuthTokens(user);
     setAuthTokensToCookie(res, tokens);
-    res.status(StatusCodes.CREATED).send({ user });
+    res.status(StatusCodes.CREATED).send({ user: user, tokens: tokens });
   }),
 
   logout: catchAsync(async (req, res) => {

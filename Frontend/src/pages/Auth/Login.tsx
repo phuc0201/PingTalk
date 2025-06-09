@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { doLogin } from "../../services/auth.service";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -6,7 +8,11 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ email, password });
+    doLogin({ email, password }).then((res) => {
+      if (res.tokens) {
+        alert("Successfully");
+      }
+    });
   };
 
   return (
@@ -68,12 +74,12 @@ const Login: React.FC = () => {
 
             <div className="mt-4 text-start text-sm text-gray-300">
               Need an account?{" "}
-              <a
-                href="/auth/register"
+              <Link
+                to="/auth/register"
                 className="text-indigo-400 hover:underline"
               >
                 Register
-              </a>
+              </Link>
             </div>
           </form>
         </div>
