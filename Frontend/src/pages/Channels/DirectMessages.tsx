@@ -8,14 +8,16 @@ import { CiImageOn } from "react-icons/ci";
 import { CiFaceSmile } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import AvatarDefault from "../../components/AvatarDefault";
+import VoiceCallModal from "../../components/VoiceCallModal";
 const DrirectMessages: React.FC = () => {
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [calling, setCalling] = useState<boolean>(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
       senderId: 1,
-      senderName: "TônND",
+      senderName: "Toàn",
       senderAvatar: "",
       content: "https://discord.gg/WGAHWAYq",
       timestamp: "09/10/2023, 00:34",
@@ -59,6 +61,15 @@ const DrirectMessages: React.FC = () => {
     }
   };
 
+  const handleStartVideoCall = (friendId: string) => {
+    console.log(`Starting video call with friend ID: ${friendId}`);
+  };
+
+  const handleStartVoiceCall = (friendId: string) => {
+    console.log(`Starting voice call with friend ID: ${friendId}`);
+    setCalling(true);
+  };
+
   const isUrl = (text: string) => {
     try {
       new URL(text);
@@ -70,20 +81,27 @@ const DrirectMessages: React.FC = () => {
 
   return (
     <div className="flex flex-col bg-customDark text-gray-200 h-full">
+      <VoiceCallModal isOpen={calling} onHangup={() => setCalling(false)} />
       {/* Header */}
       <header className="h-12 min-h-[48px] px-4 border-b border-zinc-800 flex items-center justify-between bg-customDark">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-dark flex items-center justify-center overflow-hidden">
-            {/* <img src="" alt="TônND" className="w-full h-full object-cover" /> */}
+            {/* <img src="" alt="Toàn" className="w-full h-full object-cover" /> */}
             <AvatarDefault />
           </div>
-          <h1 className="font-bold text-white">TônND</h1>
+          <h1 className="font-bold text-white">Toàn</h1>
         </div>
         <div className="flex items-center gap-4">
-          <button className="text-gray-400 hover:text-gray-200">
+          <button
+            onClick={() => handleStartVoiceCall("9878")}
+            className="text-gray-400 hover:text-gray-200"
+          >
             <FiPhone className="h-5 w-5" />
           </button>
-          <button className="text-gray-400 hover:text-gray-200">
+          <button
+            onClick={() => handleStartVideoCall("9878")}
+            className="text-gray-400 hover:text-gray-200"
+          >
             <IoVideocamOutline className="h-5 w-5" />
           </button>
           <button className="text-gray-400 hover:text-gray-200">
@@ -108,16 +126,16 @@ const DrirectMessages: React.FC = () => {
             <div className="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden mb-2">
               {/* <img
                 src="/placeholder.svg?height=64&width=64"
-                alt="TônND"
+                alt="Toàn"
                 className="w-full h-full object-cover"
               /> */}
               <AvatarDefault />
             </div>
-            <h2 className="text-lg font-bold text-white">TônND</h2>
+            <h2 className="text-lg font-bold text-white">Toàn</h2>
             <p className="text-gray-400 text-sm">.tonnd</p>
             <p className="text-gray-400 text-sm mt-2">
               This is the beginning of your direct message history with{" "}
-              <span className="font-bold text-white">TônND</span>.
+              <span className="font-bold text-white">Toàn</span>.
             </p>
           </div>
 
@@ -176,7 +194,7 @@ const DrirectMessages: React.FC = () => {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Message @TônND"
+            placeholder="Message @Toàn"
             className="w-full bg-[#383a40] rounded-md py-2 px-12 focus:outline-none"
           />
 

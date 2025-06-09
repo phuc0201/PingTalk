@@ -87,7 +87,7 @@ const CreateDMModal: React.FC = () => {
                 ? "Find or start a conversation"
                 : "Type the username of a friend"
             }
-            className="flex-grow bg-transparent min-w-[120px] text-gray-300 rounded-2xl py-2 text-sm focus:outline-none focus:ring-0"
+            className="flex-grow bg-transparent min-w-[120px] text-gray-300 py-2 text-sm focus:outline-none focus:ring-0"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
